@@ -1,3 +1,9 @@
+#Data Structures:
+tasks = []
+players = []
+locations = []
+categories = []
+
 #Welcome Message and tutorial
 print("Welcome to the Minecraft Task Manager!!!\n"
       "No more shall you struggle with your in-game adminsitrative tasks. You can centralize your workflow here\n\n"
@@ -22,7 +28,7 @@ print("Welcome to the Minecraft Task Manager!!!\n"
       "remcategory: delete a task category\n"
       "listcategories: view all task categories\n\n"
       "Locations:\n"
-      "addlocation: add a named location (eg Basecamp, Sugarcane Farm\n)"
+      "addlocation: add a named location (eg Basecamp, Sugarcane Farm)\n"
       "remlocation: remove a location\n"
       "listlocations: view all locations\n\n"
       "System/Meta\n"
