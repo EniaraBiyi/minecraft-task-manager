@@ -36,4 +36,69 @@ print("Welcome to the Minecraft Task Manager!!!\n"
       "allstatus: to view all tasks, players, locations, categories\n"
       "exit: end your work session\n")
 
+#Session setup
+#Adding players
+print("First, let's add players to your system: ")
+while True:
+      print("Enter a player, or press Enter to finish:")
+      player = input()
+      if player:
+            if player in players:
+                  double_entry = input("You already entered a player of the same name\n"
+                        "Are you sure you wish to proceed and enter this name again?(y/n): ")
+                  while double_entry != "y" and double_entry != "n":
+                              double_entry = input("Please enter y or n: ")
+                  if double_entry == "n":
+                        continue
+            players.append(player)
+      else:
+            print("These are the players you have entered: ")
+            if len(players) == 0:
+                  print("No player was entered")
+            for player in players:
+                  print(player)
+            break
 
+#Adding location
+print("\nNext, let's add locations: ")
+while True:
+      print("Enter a location, or press Enter to finish:")
+      location = input()
+      if location:
+            if location in locations:
+                  double_entry = input("You already entered a location of the same name\n"
+                        "Are you sure you wish to proceed and enter this location again?(y/n: ")
+                  while double_entry != "y" and double_entry != "n":
+                              double_entry = input("Please enter y or n: ")
+                  if double_entry == "n":
+                        continue
+            locations.append(location)
+      else:
+            print("These are the locations you have entered: ")
+            if len(locations) == 0:
+                  print("No location was entered")
+            for location in locations:
+                  print(location)
+            break
+
+#Adding Categories
+print("\nFinally, let's add categories, that'll help group similar tasks together: ")
+while True:
+      print("Enter a category, or press Enter to finish")
+      category = input()
+      if category:
+            if category in categories:
+                  double_entry = input("You already entered a category of the same name\n"
+                        "Are you sure you wish to proceed and enter this category again?(y/n): ")
+                  while double_entry != "y" and double_entry != "n":
+                              double_entry = input("Please enter y or n: ")
+                  if double_entry == "n":
+                        continue
+            categories.append(category)
+      else:
+            print("These are the categories you have entered: ")
+            if len(categories) == 0:
+                  print("No category was entered")
+            for category in categories:
+                  print(category)
+            break
