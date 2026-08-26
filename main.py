@@ -102,3 +102,18 @@ while True:
             for category in categories:
                   print(category)
             break
+
+
+print("Great, you should be all set up now.\n"
+      "Now you have full accesss to the programs features and can enter commands at will. Enjoy : )")
+
+
+#Command processor
+while True:
+      command = input()
+
+      if command == "exit":
+            break
+
+      else:
+            print("Unkown Command")
