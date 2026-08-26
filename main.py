@@ -2,7 +2,7 @@
 tasks = []
 players = []
 locations = []
-categories = []
+categories = ["Default"]
 
 #Welcome Message and tutorial
 print("Welcome to the Minecraft Task Manager!!!\n"
@@ -82,7 +82,8 @@ while True:
             break
 
 #Adding Categories
-print("\nFinally, let's add categories, that'll help group similar tasks together: ")
+print("\nFinally, let's add categories, that'll help group similar tasks together\n"
+      "(Note that there is already a Default category for tasks that don't have a specific category assigned): ")
 while True:
       print("Enter a category, or press Enter to finish")
       category = input()
