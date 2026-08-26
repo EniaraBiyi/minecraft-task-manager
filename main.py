@@ -6,10 +6,10 @@ categories = []
 
 #Welcome Message and tutorial
 print("Welcome to the Minecraft Task Manager!!!\n"
-      "No more shall you struggle with your in-game adminsitrative tasks. You can centralize your workflow here\n\n"
+      "No more shall you struggle with your in-game administrative tasks. You can centralize your workflow here\n\n"
       "The system manages all your TASKS. Tasks are the work you need to get done in them. They can have associated\n"
       "PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine. A task must not strictly\n"
-      "have asigned players or a location, and belongs to a built-in default catefory if you do not assign one. All\n"
+      "have assigned players or a location, and belongs to a built-in default category if you do not assign one. All\n"
       "tasks are marked as either completed or uncompleted.\n"
       "Let's familiarise you with the system's command:\n\n"
       "Tasks:\n"
@@ -67,7 +67,7 @@ while True:
       if location:
             if location in locations:
                   double_entry = input("You already entered a location of the same name\n"
-                        "Are you sure you wish to proceed and enter this location again?(y/n: ")
+                        "Are you sure you wish to proceed and enter this location again?(y/n): ")
                   while double_entry != "y" and double_entry != "n":
                               double_entry = input("Please enter y or n: ")
                   if double_entry == "n":
