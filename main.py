@@ -39,17 +39,13 @@ print("Welcome to the Minecraft Task Manager!!!\n"
 #Session setup
 #Adding players
 print("First, let's add players to your system: ")
+print("Enter players, or press Enter to finish:")
 while True:
-      print("Enter a player, or press Enter to finish:")
       player = input()
       if player:
             if player in players:
-                  double_entry = input("You already entered a player of the same name\n"
-                        "Are you sure you wish to proceed and enter this name again?(y/n): ")
-                  while double_entry != "y" and double_entry != "n":
-                              double_entry = input("Please enter y or n: ")
-                  if double_entry == "n":
-                        continue
+                  print("You already entered this player")
+                  continue
             players.append(player)
       else:
             print("These are the players you have entered: ")
@@ -61,17 +57,13 @@ while True:
 
 #Adding location
 print("\nNext, let's add locations: ")
+print("Enter locations, or press Enter to finish:")
 while True:
-      print("Enter a location, or press Enter to finish:")
       location = input()
       if location:
             if location in locations:
-                  double_entry = input("You already entered a location of the same name\n"
-                        "Are you sure you wish to proceed and enter this location again?(y/n): ")
-                  while double_entry != "y" and double_entry != "n":
-                              double_entry = input("Please enter y or n: ")
-                  if double_entry == "n":
-                        continue
+                  print("You already entered this location")
+                  continue
             locations.append(location)
       else:
             print("These are the locations you have entered: ")
@@ -84,20 +76,15 @@ while True:
 #Adding Categories
 print("\nFinally, let's add categories, that'll help group similar tasks together\n"
       "(Note that there is already a Default category for tasks that don't have a specific category assigned): ")
+print("Enter categories, or press Enter to finish")
 while True:
-      print("Enter a category, or press Enter to finish")
       category = input()
       if category:
             if category in categories:
-                  double_entry = input("You already entered a category of the same name\n"
-                        "Are you sure you wish to proceed and enter this category again?(y/n): ")
-                  while double_entry != "y" and double_entry != "n":
-                              double_entry = input("Please enter y or n: ")
-                  if double_entry == "n":
-                        continue
+                  print("You already entered this category")
             categories.append(category)
       else:
-            print("These are the categories you have entered: ")
+            print("These are the categories you have entered (Default is built-in): ")
             if len(categories) == 0:
                   print("No category was entered")
             for category in categories:
@@ -105,16 +92,90 @@ while True:
             break
 
 
-print("Great, you should be all set up now.\n"
-      "Now you have full accesss to the programs features and can enter commands at will. Enjoy : )")
+print("\nGreat, you should be all set up now.\n"
+      "Now you have full accesss to the programs features and can enter commands at will. Enjoy : )\n")
 
 
 #Command processor
 while True:
-      command = input()
+      command = input("Enter command")
 
       if command == "exit":
-            break
+           break
 
+      #addtask command logic
+      elif command == "addtask":
+            task = { }
+
+            task_name = ""
+            task_players = []
+            task_locations = []
+            task_category = ""
+
+            #obtain task name
+            print("Enter inputs for the prompts accordingly. Press Enter without input to skip or continue")
+            while True:
+                  task_name = input("Enter task name: ")
+
+                  if not task_name or task_name.isspace():
+                        print("You must enter a valid task name")
+
+                  else:
+                        task["name"] = task_name
+                        break
+
+            print("Enter players assigned to the task:")
+            while True:
+                  task_player = input()
+
+                  if not task_player:
+                        task["players"] = task_players
+                        break
+
+                  elif task_player not in players:
+                        print("The player entered has not yet been saved in the system. Please enter a valid location")
+
+                  elif task_player in task_players:
+                        print("That player has already been assigned to this task")
+
+                  else:
+                        task_players.append(task_player)
+
+            print("Enter location(s) for the task: ")
+            while True:
+                  task_location = input()
+
+                  if not task_location:
+                        task["location"] = task_locations
+                        break
+
+                  elif task_location not in locations:
+                        print("The location entered has not yet been saved in the system. Please enter a valid location")
+
+                  elif task_location in task_locations:
+                        print("That location has already been assigned to this task")
+
+                  else:
+                        task_locations.append(task_location)
+
+            while True:
+                  task_category = input("Enter the category for this task. Press Enter to put task in to Default category: ")
+
+                  if not task_category:
+                        task["category"] = "Default"
+                        break
+
+                  elif task_category not in categories:
+                        print("The category entered has not yet been saved in the system. Please enter a valid category")
+
+                  else:
+                        task["category"] = task_category
+                        break
+
+            task["status"] = False
+            tasks.append(task)
+            print("Execution complete. You may now enter another command")
       else:
             print("Unkown Command")
+
+print(tasks)
