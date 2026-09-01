@@ -98,14 +98,15 @@ print("\nGreat, you should be all set up now.\n"
 
 #Command processor
 while True:
-      command = input("Enter command")
+      command = input("Enter command: ")
 
       if command == "exit":
-           break
+            print("Session Ended")
+            break
 
       #addtask command logic
       elif command == "addtask":
-            task = { }
+            task_to_add = { }
 
             task_name = ""
             task_players = []
@@ -120,16 +121,20 @@ while True:
                   if not task_name or task_name.isspace():
                         print("You must enter a valid task name")
 
+                  if task_name in [task.get("name") for task in tasks]:
+                        print("A task of the same name already exitst")
+
                   else:
-                        task["name"] = task_name
+                        task_to_add["name"] = task_name
                         break
 
+            #obtain task players
             print("Enter players assigned to the task:")
             while True:
                   task_player = input()
 
                   if not task_player:
-                        task["players"] = task_players
+                        task_to_add["players"] = task_players
                         break
 
                   elif task_player not in players:
@@ -141,12 +146,13 @@ while True:
                   else:
                         task_players.append(task_player)
 
+            #obtain task locations
             print("Enter location(s) for the task: ")
             while True:
                   task_location = input()
 
                   if not task_location:
-                        task["location"] = task_locations
+                        task_to_add["location"] = task_locations
                         break
 
                   elif task_location not in locations:
@@ -158,24 +164,59 @@ while True:
                   else:
                         task_locations.append(task_location)
 
+            #obtain task categories
             while True:
                   task_category = input("Enter the category for this task. Press Enter to put task in to Default category: ")
 
                   if not task_category:
-                        task["category"] = "Default"
+                        task_to_add["category"] = "Default"
                         break
 
                   elif task_category not in categories:
                         print("The category entered has not yet been saved in the system. Please enter a valid category")
 
                   else:
-                        task["category"] = task_category
+                        task_to_add["category"] = task_category
                         break
 
-            task["status"] = False
-            tasks.append(task)
-            print("Execution complete. You may now enter another command")
+            #set task stasus
+            task_to_add["status"] = False
+
+            #add task
+            tasks.append(task_to_add)
+            print("Your task was successfully added\n")
+
+      #remtask command logic
+      elif command == "remtask":
+
+            deletable_tasks = [task.get("name") for task in tasks if not task.get("status")]
+
+            if len(deletable_tasks) != 0:
+                  print("\nCurrent pending tasks in system:")
+                  for task in deletable_tasks:
+                        print(task)
+
+
+            else:
+                  print("There are currently no tasks in the system to delete\n")
+                  continue
+
+            task_to_delete = input("\nEnter the name of the task which you wish to delete: ")
+
+            if not task_to_delete in deletable_tasks:
+                  print("No such pending task exists\n")
+                  continue
+
+            else:
+                  for task in tasks:
+                        if task.get("name") == task_to_delete:
+                              tasks.remove(task)
+                              break
+                  print("The task was successfully deleted\n")
+
       else:
             print("Unkown Command")
 
-print(tasks)
+
+for task in tasks:
+      print(task.get("name"), end = ", ")
