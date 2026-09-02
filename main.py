@@ -214,6 +214,29 @@ while True:
                               break
                   print("The task was successfully deleted\n")
 
+      #checktask command logicd
+      elif command == "checktask":
+
+            checkable_tasks = [task.get("name") for task in tasks if not task.get("status")]
+
+            print("\nHere are your uncompleted tasks: ")
+
+            for task in checkable_tasks:
+                  print(task.get("name"))
+
+            task_to_check = input("\nEnter the name of the task which you wish to check complete:\n")
+
+            if not task_to_check in checkable_tasks:
+                  print("\nThat task can't be marked complete")
+
+            else:
+                  for task in checkable_tasks:
+                        if task == task_to_check:
+                              task["status"] = True
+                              print("\nThe task was successfully checked\n")
+                              break
+
+
       else:
             print("Unkown Command")
 
