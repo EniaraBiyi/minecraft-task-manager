@@ -237,6 +237,24 @@ while True:
                               break
 
 
+      #taskscomp command logic
+      elif command == "taskscomp":
+
+            print("\nHere are your completed tasks: ")
+            for task in tasks:
+                  if task["status"]:
+                        print(task.get("name"))
+            print()
+
+      #taskuncomp command logic
+      elif command == "tasksuncomp":
+
+            print("\nHere are your uncompleted tasks: ")
+            for task in tasks:
+                  if not task["status"]:
+                        print(task.get("name"))
+            print()
+
       else:
             print("Unkown Command")
 
