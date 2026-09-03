@@ -19,6 +19,7 @@ print("Welcome to the Minecraft Task Manager!!!\n"
       "taskscomp: view completed tasks\n"
       "tasksuncomp: view uncompleted tasks\n"
       "searchtask: find a specific task\n\n"
+      "alltasks: display the names of all tasks"
       "Players:\n"
       "addplayer: add a player to the system\n"
       "remplayer: remove a player from the system\n"
@@ -33,7 +34,7 @@ print("Welcome to the Minecraft Task Manager!!!\n"
       "listlocations: view all locations\n\n"
       "System/Meta\n"
       "help: pull up the user manual you are currently reading\n"
-      "allstatus: to view all tasks, players, locations, categories\n"
+      "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
       "exit: end your work session\n")
 
 #Session setup
@@ -102,6 +103,7 @@ while True:
 
       if command == "exit":
             print("Session Ended")
+            print("Thank you for using the Minecraft Task Manager")
             break
 
       #addtask command logic
@@ -152,7 +154,7 @@ while True:
                   task_location = input()
 
                   if not task_location:
-                        task_to_add["location"] = task_locations
+                        task_to_add["locations"] = task_locations
                         break
 
                   elif task_location not in locations:
@@ -164,7 +166,7 @@ while True:
                   else:
                         task_locations.append(task_location)
 
-            #obtain task categories
+            #obtain task category
             while True:
                   task_category = input("Enter the category for this task. Press Enter to put task in to Default category: ")
 
@@ -253,6 +255,53 @@ while True:
             for task in tasks:
                   if not task["status"]:
                         print(task.get("name"))
+            print()
+
+      #searchtask command logic
+      elif command == "searchtask":
+
+            task_to_search = input("\nWhich task are you looking for: ")
+
+            for task in tasks:
+                  if task.get("name") == task_to_search:
+                        print(f"Task Name: {task.get("name")}")
+                        print("Assigned Players:")
+                        for player in task.get("players"):
+                              print(player)
+                        print(f"Task Locations:")
+                        for location in task.get("locations"):
+                              print(location)
+                        print(f"Task Category: {task.get("category")}")
+                        print("Task Status: ", end="")
+                        if task.get("status"):
+                              print("Completed")
+                        else:
+                              print("Unfinished")
+                        break
+
+            else:
+                  print("No such task exists in the system.\nPlease use the 'alltasks' command to view the tasks saved in your session")
+                  continue
+
+            print()
+
+      #alltasks command logic
+      elif command == "alltasks":
+
+            if not tasks:
+                  print("\nNo tasks exist in the system yet.")
+                  continue
+
+            print("\nAll Tasks:")
+            counter = 1
+            for task in tasks:
+                  print(f"{counter}. {task.get("name")}: ", end = "")
+                  if task.get("status"):
+                        print("Completed")
+                  else:
+                        print("Unfinished")
+                  counter += 1
+
             print()
 
       else:
