@@ -381,9 +381,34 @@ while True:
 
       elif command == "listplayers":
 
-            print("Here are the players saved in your session:")
+            print("\nHere are the players saved in your session:")
             for player in players:
                   print(player)
+
+      elif command == "addcategories":
+            print("\nEnter categories you wish to add, or press Enter alone to finish:")
+
+            counter = 0
+            added_categories = []
+            while True:
+                  caetegory = input().strip().lower()
+
+                  if category and category not in players:
+                        categories.append(category)
+                        added_categories.append(category)
+                        counter += 1
+                  elif category in categories:
+                        print("This category is already saved to the system. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+                  elif not category:
+                        break
+
+            print(f"{counter} categories were added")
+            print("Added categories:")
+            for category in added_categories:
+                  print(category)
+            print()
 
       else:
             print("Unkown Command")
