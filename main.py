@@ -328,24 +328,57 @@ while True:
 
             print()
 
-      #addplayer command logic
+      #addplayers command logic
       elif command == "addplayers":
-                  print("\nEnter players, or press Enter alone to finish:")
+                  print("\nEnter players you wish to add, or press Enter alone to finish:")
 
                   counter = 0
+                  added_players = []
                   while True:
                         player = input().strip().lower()
 
                         if player and player not in players:
                               players.append(player)
+                              added_players.append(player)
                               counter += 1
                         elif player in players:
                               print("This player is already saved to the system. Be mindful of spelling. Casing is irrelevant")
-                              print("You may continue, or press Enter to finish")
+                              print("You may continue, or press Enter to finish:")
+                              continue
                         elif not player:
                               break
 
-                  print(f"{counter} players were added\n")
+                  print(f"{counter} players were added")
+                  print("Added players:")
+                  for player in added_players:
+                        print(player)
+                  print()
+
+      #remplayers command logic
+      elif command == "remplayers":
+            print("\nEnter players you wish to remove, or press Enter alone to finish:")
+
+            counter = 0
+            removed_players = []
+            while True:
+                  player = input().strip().lower()
+
+                  if player and player in players:
+                        players.remove(player)
+                        counter += 1
+                  elif player not in players:
+                        print("This player is not saved to the system. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+                  elif not player:
+                        break
+
+            print(f"{counter} players were removed")
+            print("Removed players:")
+            for player in removed_players:
+                    print(player)
+            print()
+
 
       else:
             print("Unkown Command")
