@@ -410,5 +410,29 @@ while True:
                   print(category)
             print()
 
+      elif command == "remcategories":
+            print("\nEnter categories you wish to remove, or press Enter alone to finish:")
+
+            counter = 0
+            removed_categories = []
+            while True:
+                  category = input().strip().lower()
+
+                  if category and category in categories:
+                        categories.remove(category)
+                        counter += 1
+                  elif category not in categories:
+                        print("This category is not saved to the system. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+                  elif not category:
+                        break
+
+            print(f"{counter} categories were removed")
+            print("Removed categories:")
+            for category in removed_categories:
+                    print(category)
+            print()
+
       else:
             print("Unkown Command")
