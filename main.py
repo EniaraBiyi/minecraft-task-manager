@@ -38,7 +38,7 @@ print("Welcome to the Minecraft Task Manager!!!\n"
       "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
       "exit: end your work session\n\n"
       "Some things you should know:\n"
-      " -This program is not case sensitive\nSo 'Steve' and 'steve' are  considered the same thing\n"
+      " -This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
       " -This program removes all leading and trailing whitespace (fancy talk for invisible characters) in your inputs")
 
 #Session setup
@@ -502,6 +502,41 @@ while True:
             for location in locations:
                   print(location)
             print()
+
+      elif command == "help":
+            print("The system manages all your TASKS. Tasks are the work you need to get done. They can have associated\n"
+                  "PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine. A task must not strictly\n"
+                  "have assigned players or a location, and belongs to a built-in default category if you do not assign one. All\n"
+                  "A task can have only one name and fall under one category, but it can have multiple players and locations assigned\n"
+                  "tasks are marked as either completed or uncompleted.\n"
+                  "Let's familiarise you with the system's command:\n\n"
+                  "Tasks:\n"
+                  "addtask: add a new task\n"
+                  "remtask: delete an uncompleted task\n"
+                  "checktask: mark a task as complete\n"
+                  "taskscomp: view completed tasks\n"
+                  "tasksuncomp: view uncompleted tasks\n"
+                  "searchtask: find a specific task\n\n"
+                  "alltasks: display the names of all tasks\n"
+                  "Players:\n"
+                  "addplayers: add a player to the system\n"
+                  "remplayers: remove a player from the system\n"
+                  "listplayers: view all players\n\n"
+                  "Categories:\n"
+                  "addcategories: add a task category\n"
+                  "remcategories: delete a task category\n"
+                  "listcategories: view all task categories\n\n"
+                  "Locations:\n"
+                  "addlocations: add a named location (eg Basecamp, Sugarcane Farm)\n"
+                  "remlocations: remove a location\n"
+                  "listlocations: view all locations\n\n"
+                  "System/Meta\n"
+                  "help: pull up the user manual you are currently reading\n"
+                  "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
+                  "exit: end your work session\n\n"
+                  "Some things you should know:\n"
+                  " -This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
+                  " -This program removes all leading and trailing whitespace (fancy talk for invisible characters) in your inputs")
 
       else:
             print("Unkown Command")
