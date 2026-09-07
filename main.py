@@ -379,6 +379,11 @@ while True:
                     print(player)
             print()
 
+      elif command == "listplayers":
+
+            print("Here are the players saved in your session:")
+            for player in players:
+                  print(player)
 
       else:
             print("Unkown Command")
