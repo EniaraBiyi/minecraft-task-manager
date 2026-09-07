@@ -394,7 +394,7 @@ while True:
             while True:
                   caetegory = input().strip().lower()
 
-                  if category and category not in players:
+                  if category and category not in categories:
                         categories.append(category)
                         added_categories.append(category)
                         counter += 1
@@ -423,7 +423,7 @@ while True:
                         if category != "default":
                               categories.remove(category)
                               counter += 1
-                        elif category == "default":
+                        else:
                               print("Default is a built-in category for tasks that don't have a specidic one assigned. It cannot be removed"
                                     "You may continue, or press Enter to finish:")
                               continue
@@ -445,6 +445,62 @@ while True:
             print("\nHere are the categories saved in your session:")
             for category in categories:
                   print(category)
+            print()
+
+      elif command == "addlocations":
+            print("\nEnter locations you wish to add, or press Enter alone to finish:")
+
+            counter = 0
+            added_locations = []
+            while True:
+                  location = input().strip().lower()
+
+                  if location and location not in locations:
+                        locations.append(location)
+                        added_locations.append(location)
+                        counter += 1
+                  elif location in locations:
+                        print("This location is already saved to the system. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+                  elif not location:
+                        break
+
+            print(f"{counter} locations were added")
+            print("Added locations:")
+            for location in added_locations:
+                  print(location)
+            print()
+
+      elif command == "remlocations":
+            print("\nEnter locations you wish to remove, or press Enter alone to finish:")
+
+            counter = 0
+            removed_locations = []
+            while True:
+                  location = input().strip().lower()
+
+                  if location and location in locations:
+                        categories.remove(category)
+                        counter += 1
+                  elif location not in locations:
+                        print("This location is not saved to the system. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+                  elif not location:
+                        break
+
+            print(f"{counter} categories were removed")
+            print("Removed locations:")
+            for locations in removed_locations:
+                    print(location)
+            print()
+
+      elif command == "listlocations":
+
+            print("\nHere are the locations saved in your session:")
+            for location in locations:
+                  print(location)
             print()
 
       else:
