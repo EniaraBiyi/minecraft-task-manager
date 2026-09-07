@@ -330,29 +330,29 @@ while True:
 
       #addplayers command logic
       elif command == "addplayers":
-                  print("\nEnter players you wish to add, or press Enter alone to finish:")
+            print("\nEnter players you wish to add, or press Enter alone to finish:")
 
-                  counter = 0
-                  added_players = []
-                  while True:
-                        player = input().strip().lower()
+            counter = 0
+            added_players = []
+            while True:
+                  player = input().strip().lower()
 
-                        if player and player not in players:
-                              players.append(player)
-                              added_players.append(player)
-                              counter += 1
-                        elif player in players:
-                              print("This player is already saved to the system. Be mindful of spelling. Casing is irrelevant")
-                              print("You may continue, or press Enter to finish:")
-                              continue
-                        elif not player:
-                              break
+                  if player and player not in players:
+                        players.append(player)
+                        added_players.append(player)
+                        counter += 1
+                  elif player in players:
+                        print("This player is already saved to the system. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+                  elif not player:
+                        break
 
-                  print(f"{counter} players were added")
-                  print("Added players:")
-                  for player in added_players:
-                        print(player)
-                  print()
+            print(f"{counter} players were added")
+            print("Added players:")
+            for player in added_players:
+                  print(player)
+            print()
 
       #remplayers command logic
       elif command == "remplayers":
@@ -384,6 +384,7 @@ while True:
             print("\nHere are the players saved in your session:")
             for player in players:
                   print(player)
+            print()
 
       elif command == "addcategories":
             print("\nEnter categories you wish to add, or press Enter alone to finish:")
@@ -432,6 +433,13 @@ while True:
             print("Removed categories:")
             for category in removed_categories:
                     print(category)
+            print()
+
+      elif command == "listcategories":
+
+            print("\nHere are the categories saved in your session:")
+            for category in categories:
+                  print(category)
             print()
 
       else:
