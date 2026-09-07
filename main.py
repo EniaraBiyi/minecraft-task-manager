@@ -420,8 +420,13 @@ while True:
                   category = input().strip().lower()
 
                   if category and category in categories:
-                        categories.remove(category)
-                        counter += 1
+                        if category != "default":
+                              categories.remove(category)
+                              counter += 1
+                        elif category == "default":
+                              print("Default is a built-in category for tasks that don't have a specidic one assigned. It cannot be removed"
+                                    "You may continue, or press Enter to finish:")
+                              continue
                   elif category not in categories:
                         print("This category is not saved to the system. Be mindful of spelling. Casing is irrelevant")
                         print("You may continue, or press Enter to finish:")
