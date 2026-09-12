@@ -69,6 +69,17 @@ def remove_items(item_list, item_type, item_type_plural, protected_item = None):
                   print(item)
       print()
 
+def tasks_by_status(list_of_tasks, status, label):
+      matching_tasks = [task for task in list_of_tasks if task.get("status") == status]
+      if not matching_tasks:
+            print(f"You have no {label} tasks")
+            return
+
+      print(f"{label} tasks: ")
+      for task in matching_tasks:
+                  print(task.get("name"))
+      print()
+
 #Data Structures:
 tasks = []
 players = []
@@ -336,30 +347,10 @@ while True:
 
       #taskscomp command logic
       elif command == "taskscomp":
-
-            if not [task for task in tasks if task.get("status")]:
-                print("You have no complete tasks\n")
-                continue
-
-            print("\nHere are your completed tasks: ")
-            for task in tasks:
-                  if task["status"]:
-                        print(task.get("name"))
-            print()
-
+            tasks_by_status(tasks, True, "Completed")
       #taskuncomp command logic
       elif command == "tasksuncomp":
-
-            if not [task for task in tasks if not task.get("status")]:
-                print("You have no unfinished tasks\n")
-                continue
-
-            print("\nHere are your uncompleted tasks: ")
-            for task in tasks:
-                  if not task["status"]:
-                        print(task.get("name"))
-            print()
-
+            tasks_by_status(tasks, False, "Uncompleted")
       #searchtask command logic
       elif command == "searchtask":
 
