@@ -1,3 +1,38 @@
+def add_items(item_list, item_type, item_type_plural):
+      print(f"\nEnter {item_type_plural} you wish to add, or press Enter alone to finish:")
+
+      function_counter = 0
+      added_items = []
+      while True:
+            item = input()
+
+            if item:
+                  if item.isspace():
+                        print(f"This is all whitespaces and isn't a valid {item_type}\n"
+                              f"Enter valid {item_type_plural}, or press Enter to stop")
+                        continue
+
+                  if item.strip().lower() not in item_list:
+                        item_list.append(item.strip().lower())
+                        added_items.append(item.strip().lower())
+                        function_counter += 1
+
+                  else:
+                        print(f"This {item_type} is already saved in this session. Be mindful of spelling. Casing is irrelevant")
+                        print("You may continue, or press Enter to finish:")
+                        continue
+
+            else:
+                  break
+
+      print(f"{function_counter} {item_type_plural} were added")
+
+      if added_items:
+            print(f"Added {item_type_plural}:")
+            for item in added_items:
+                  print(item)
+      print()
+
 #Data Structures:
 tasks = []
 players = []
@@ -348,39 +383,7 @@ while True:
 
       #addplayers command logic
       elif command == "addplayers":
-            print("\nEnter players you wish to add, or press Enter alone to finish:")
-
-            counter = 0
-            added_players = []
-            while True:
-                  player = input()
-
-                  if player:
-                        if player.isspace():
-                              print("This is all whitespaces and isn't a valid player name\n"
-                                    "Enter valid player names, or press Enter to stop")
-                              continue
-
-                        if player.strip().lower() not in players:
-                              players.append(player.strip().lower())
-                              added_players.append(player.strip().lower())
-                              counter += 1
-
-                        else:
-                              print("This player is already saved in this session. Be mindful of spelling. Casing is irrelevant")
-                              print("You may continue, or press Enter to finish:")
-                              continue
-
-                  else:
-                        break
-
-            print(f"{counter} players were added")
-
-            if added_players:
-                print("Added players:")
-                for player in added_players:
-                    print(player)
-            print()
+            add_items(players, "player", "players")
 
       #remplayers command logic
       elif command == "remplayers":
@@ -427,39 +430,7 @@ while True:
                   print()
 
       elif command == "addcategories":
-            print("\nEnter categories you wish to add, or press Enter alone to finish:")
-
-            counter = 0
-            added_categories = []
-            while True:
-                  category = input()
-
-                  if category:
-                        if category.isspace():
-                              print("This is all whitespaces and isn't a valid category\n"
-                                    "Enter valid categories, or press Enter to stop")
-                              continue
-
-                        if category.strip().lower() not in categories:
-                              categories.append(category.strip().lower())
-                              added_categories.append(category.strip().lower())
-                              counter += 1
-
-                        else:
-                              print("This category is already saved in this session. Be mindful of spelling. Casing is irrelevant")
-                              print("You may continue, or press Enter to finish:")
-                              continue
-
-                  else:
-                        break
-
-            print(f"{counter} categories were added")
-
-            if added_categories:
-                  print("Added categories:")
-                  for category in added_categories:
-                        print(category)
-            print()
+            add_items(categories, "category", "categories")
 
       elif command == "remcategories":
 
@@ -506,39 +477,7 @@ while True:
             print()
 
       elif command == "addlocations":
-            print("\nEnter locations you wish to add, or press Enter alone to finish:")
-
-            counter = 0
-            added_locations = []
-            while True:
-                  location = input()
-
-                  if location:
-                        if location.isspace():
-                              print("This is all whitespaces and isn't a valid location\n"
-                                    "Enter valid locations, or press Enter to stop")
-                              continue
-
-                        if location.strip().lower() not in locations:
-                              locations.append(location.strip().lower())
-                              added_locations.append(location.strip().lower())
-                              counter += 1
-
-                        else:
-                              print("This location is already saved in this session. Be mindful of spelling. Casing is irrelevant")
-                              print("You may continue, or press Enter to finish:")
-                              continue
-
-                  else:
-                        break
-
-            print(f"{counter} locations were added")
-
-            if added_locations:
-                  print("Added locations:")
-                  for location in added_locations:
-                        print(location)
-            print()
+            add_items(locations, "location", "locations")
 
       elif command == "remlocations":
             if not locations:
@@ -699,5 +638,5 @@ while True:
 
 
       else:
-           print("Unkown Command")
+           print("Unkown Command\n")
            continue
