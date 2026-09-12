@@ -1,7 +1,6 @@
 def add_items(item_list, item_type, item_type_plural):
       print(f"\nEnter {item_type_plural} you wish to add, or press Enter alone to finish:")
 
-      function_counter = 0
       added_items = []
       while True:
             item = input()
@@ -11,12 +10,9 @@ def add_items(item_list, item_type, item_type_plural):
                         print(f"This is all whitespaces and isn't a valid {item_type}\n"
                               f"Enter valid {item_type_plural}, or press Enter to stop")
                         continue
-
                   if item.strip().lower() not in item_list:
                         item_list.append(item.strip().lower())
                         added_items.append(item.strip().lower())
-                        function_counter += 1
-
                   else:
                         print(f"This {item_type} is already saved in this session. Be mindful of spelling. Casing is irrelevant")
                         print("You may continue, or press Enter to finish:")
@@ -25,11 +21,51 @@ def add_items(item_list, item_type, item_type_plural):
             else:
                   break
 
-      print(f"{function_counter} {item_type_plural} were added")
+      label = item_type if len(added_items) else item_type_plural
+      verb = "was" if added_items == 1 else "were"
+      print(f"{added_items} {label} {verb} added")
 
       if added_items:
             print(f"Added {item_type_plural}:")
             for item in added_items:
+                  print(item)
+      print()
+
+def remove_items(item_list, item_type, item_type_plural, protected_item = None):
+      min_length = 1 if protected_item else 0
+
+      if len(item_list) == min_length:
+            print(f"There aren't any {item_type_plural} saved in this session that can be deleted\n")
+            return
+
+      print(f"\nEnter {item_type_plural} you wish to remove, or press Enter alone to finish:")
+
+      removed_items = []
+      while True:
+            item = input()
+
+            if item and item.strip().lower() in item_list:
+                  if item.strip().lower() != protected_item:
+                        item_list.remove(item.strip().lower())
+                        removed_items.append(item.strip().lower())
+                  else:
+                        print(f"{protected_item} is a built-in {item_type} for tasks. It cannot be removed\n"
+                              "You may continue, or press Enter to finish:")
+                        continue
+            elif item and item.strip().lower() not in item_list:
+                  print(f"This {item_type} is not saved to the system. Be mindful of spelling. Casing is irrelevant")
+                  print("You may continue, or press Enter to finish:")
+                  continue
+            elif not item:
+                  break
+
+      label = item_type if len(removed_items) == 1 else item_type_plural
+      verb = "was" if len(removed_items) == 1 else "were"
+      print(f"{len(removed_items)} {label} {verb} removed")
+
+      if removed_items:
+            print(f"Removed {item_type_plural}:")
+            for item in removed_items:
                   print(item)
       print()
 
@@ -40,7 +76,7 @@ locations = []
 categories = ["default"]
 
 #Welcome Message and tutorial
-print("Welcome to the Minecraft Task Manager!!!\n"
+print("Welcome to the Minec.raft Task Manager!!!\n"
       "No more shall you struggle with your in-game administrative tasks. You can centralize your workflow here\n\n"
       "-The program manages all your TASKS. Tasks are the work you need to get done\n"
       "-They can have associated PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine.\n"
@@ -387,36 +423,7 @@ while True:
 
       #remplayers command logic
       elif command == "remplayers":
-
-            if not players:
-                  print("There aren't any players saved in this session\n")
-                  continue
-
-            print("\nEnter players you wish to remove, or press Enter alone to finish:")
-
-            counter = 0
-            removed_players = []
-            while True:
-                  player = input()
-
-                  if player and player.strip().lower() in players:
-                        players.remove(player.strip().lower())
-                        removed_players.append(player.strip().lower())
-                        counter += 1
-                  elif player and player.strip().lower() not in players:
-                        print("This player is not saved to the system. Be mindful of spelling. Casing is irrelevant")
-                        print("You may continue, or press Enter to finish:")
-                        continue
-                  elif not player:
-                        break
-
-            print(f"{counter} players were removed")
-
-            if removed_players:
-                  print("Removed players:")
-                  for player in removed_players:
-                        print(player)
-            print()
+            remove_items(players, "player", "players")
 
       elif command == "listplayers":
 
@@ -433,41 +440,7 @@ while True:
             add_items(categories, "category", "categories")
 
       elif command == "remcategories":
-
-            if len(categories) == 1:
-                  print("There are no saved categories in this session that can be deleted\n")
-                  continue
-
-            print("\nEnter categories you wish to remove, or press Enter alone to finish:")
-
-            counter = 0
-            removed_categories = []
-            while True:
-                  category = input()
-
-                  if category and category.strip().lower() in categories:
-                        if category.strip().lower() != "default":
-                              categories.remove(category.strip().lower())
-                              removed_categories.append(category.strip().lower())
-                              counter += 1
-                        else:
-                              print("Default is a built-in category for tasks that don't have a specific one assigned. It cannot be removed\n"
-                                    "You may continue, or press Enter to finish:")
-                              continue
-                  elif category and category.strip().lower() not in categories:
-                        print("This category is not saved to the system. Be mindful of spelling. Casing is irrelevant")
-                        print("You may continue, or press Enter to finish:")
-                        continue
-                  elif not category:
-                        break
-
-            print(f"{counter} categories were removed")
-
-            if removed_categories:
-                  print("Removed Categories: ")
-                  for category in removed_categories:
-                        print(category)
-            print()
+            remove_items(categories, "category", "categories", "default")
 
       elif command == "listcategories":
 
@@ -480,35 +453,7 @@ while True:
             add_items(locations, "location", "locations")
 
       elif command == "remlocations":
-            if not locations:
-                  print("There are no locations saved yet in this session\n")
-                  continue
-
-            print("\nEnter locations you wish to remove, or press Enter alone to finish:")
-
-            counter = 0
-            removed_locations = []
-            while True:
-                  location = input()
-
-                  if location and location.strip().lower() in locations:
-                        locations.remove(location.strip().lower())
-                        removed_locations.append(location.strip().lower())
-                        counter += 1
-                  elif location and location.strip().lower() not in locations:
-                        print("This location is not saved to the system. Be mindful of spelling. Casing is irrelevant")
-                        print("You may continue, or press Enter to finish:")
-                        continue
-                  elif not location:
-                        break
-
-            print(f"{counter} locations were removed")
-
-            if removed_locations:
-                  print("Removed locations:")
-                  for location in removed_locations:
-                        print(location)
-            print()
+            remove_items(locations, "location", "locations")
 
       elif command == "listlocations":
 
