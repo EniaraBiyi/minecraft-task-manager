@@ -125,6 +125,28 @@ def help_message():
             "-This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
             "-This program removes all leading and trailing whitespace in your inputs\n\n")
 
+def assign(list_of_items, task_to_be_added, item_type, item_type_plural):
+      print(f"\nEnter {item_type_plural} assigned to the task, or press Enter to skip:")
+
+      items_to_assign = []
+
+      while True:
+
+            item_to_append = input()
+
+            if not item_to_append:
+                  task_to_be_added[item_type_plural] = items_to_assign
+                  break
+
+            elif item_to_append.strip().lower() not in list_of_items:
+                  print(f"The {item_type} entered has not yet been saved in this session.")
+
+            elif item_to_append.strip().lower() in items_to_assign:
+                  print(f"That {item_type} has already been assigned to this task")
+
+            else:
+                  items_to_assign.append(item_to_append.strip().lower())
+
 #Data Structures:
 tasks = []
 players = []
@@ -224,8 +246,6 @@ while True:
             task_to_add = { }
 
             task_name = ""
-            task_players = []
-            task_locations = []
             task_category = ""
 
             #obtain task name
@@ -244,39 +264,10 @@ while True:
                         break
 
             #obtain task players
-            print("\nEnter player(s) assigned to the task, or press Enter to skip:")
-            while True:
-                  task_player = input()
-
-                  if not task_player:
-                        task_to_add["players"] = task_players
-                        break
-
-                  elif task_player.strip().lower() not in players:
-                        print("The player entered has not yet been saved in the system.")
-
-                  elif task_player.strip().lower() in task_players:
-                        print("That player has already been assigned to this task")
-
-                  else:
-                        task_players.append(task_player.strip().lower())
+            assign(players, task_to_add, "player", "players")
 
             #obtain task locations
-            print("\nEnter location(s) for the task, or press Enter to skip: ")
-            while True:
-                  task_location = input()
-                  if not task_location:
-                        task_to_add["locations"] = task_locations
-                        break
-
-                  elif task_location.strip().lower() not in locations:
-                        print("The location entered has not yet been saved in the system. Please enter a valid location")
-
-                  elif task_location.strip().lower() in task_locations:
-                        print("That location has already been assigned to this task")
-
-                  else:
-                        task_locations.append(task_location.strip().lower())
+            assign(locations, task_to_add, "location", "locations")
 
             #obtain task category
             while True:
