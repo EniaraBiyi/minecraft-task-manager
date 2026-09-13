@@ -147,6 +147,27 @@ def assign(list_of_items, task_to_be_added, item_type, item_type_plural):
             else:
                   items_to_assign.append(item_to_append.strip().lower())
 
+def setup(item_list, item_type, item_type_plural, presaved=0):
+      print(f"Enter {item_type_plural} you want to save, or press Enter with no input to finish:")
+      while True:
+            item = input()
+            if item:
+                  if item.isspace():
+                        print(f"I don't see anything. Please enter a valid {item_type}")
+                        continue
+                  elif item.lower().strip() in item_list:
+                        print(f"You already entered this {item_type}")
+                        continue
+                  item_list.append(item.strip().lower())
+            else:
+                  if len(item_list) == presaved:
+                        print(f"\nNo new {item_type_plural} were entered")
+                        break
+                  print(f"\nThese are the {item_type_plural} you have entered: ")
+                  for item in item_list:
+                        print(item)
+                  break
+
 #Data Structures:
 tasks = []
 players = []
@@ -162,75 +183,19 @@ help_message()
 print("Let's get your session all setup!\n")
 #Adding players
 print("First, let's add players to your system: ")
-print("Enter player names you want to save, or press Enter with no input to finish:")
-while True:
-      player = input()
-      if player:
-            if player.isspace():
-                  print("I don't see anything. Please enter a valid player name")
-                  continue
-            if player.lower().strip() in players:
-                  print("You already entered this player")
-                  continue
-            players.append(player.strip().lower())
-      else:
-            if len(players) == 0:
-                  print("\nNo player was entered")
-                  break
-            print("\nThese are the players you have entered: ")
-            for player in players:
-                  print(player)
-            break
+setup(players, "player", "players")
 
 #Adding location
 print("\nNext, let's add locations: ")
-print("Like before, Enter the locations you want to save, or press Enter with no input to finish:")
-while True:
-      location = input()
-      if location:
-            if location.isspace():
-                  print("I don't see anything. Please enter a valid location")
-                  continue
-            elif location.lower().strip() in locations:
-                  print("You already entered this location")
-                  continue
-            locations.append(location.strip().lower())
-      else:
-            if len(locations) == 0:
-                  print("\nNo location was entered")
-                  break
-            print("\nThese are the locations you have entered: ")
-            for location in locations:
-                  print(location)
-            break
+setup(locations, "location", "locations")
 
 #Adding Categories
 print("\nFinally, let's add categories, that'll help group similar tasks together\n"
-      "(Note that there is already a Default category for tasks that won't have a specific category assigned): ")
-print("Enter categories you want to save, or press Enter without input to finish:")
-while True:
-      category = input()
-      if category:
-            if category.isspace():
-                  print("Please enter a valid category")
-                  continue
-            elif category.lower().strip() in categories:
-                  print("This category has already been saved")
-                  continue
-            categories.append(category.strip().lower())
-      else:
-            if len(categories) == 1:
-                  print("\nNo category was entered. Only the default one currently exists")
-                  break
-            print("\nThese are the categories you have entered (default is built-in): ")
-            for category in categories:
-                  print(category)
-            break
-
+      "(Note that there is already a default category for tasks that won't have a specific category assigned): ")
+setup(categories, "category", "categories", 1)
 
 print("\nGreat, you should be all set up now.\n"
       "Now you have full accesss to the programs features and can enter commands at will. Enjoy : )\n")
-
 
 #Command processor
 while True:
