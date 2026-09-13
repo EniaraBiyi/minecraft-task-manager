@@ -80,6 +80,16 @@ def tasks_by_status(list_of_tasks, status, label):
                   print(task.get("name"))
       print()
 
+def list_items(list_of_items, list_item_plural):
+      if not list_of_items:
+            print(f"There are no {list_item_plural} saved yet\n")
+
+      else:
+            print(f"\nHere are the {list_item_plural} saved in your session:")
+            for item in list_of_items:
+                  print(item)
+            print()
+
 #Data Structures:
 tasks = []
 players = []
@@ -417,15 +427,7 @@ while True:
             remove_items(players, "player", "players")
 
       elif command == "listplayers":
-
-            if not players:
-                  print("There are no players saved yet in this session\n")
-
-            else:
-                  print("\nHere are the players saved in your session:")
-                  for player in players:
-                        print(player)
-                  print()
+            list_items(players, "players")
 
       elif command == "addcategories":
             add_items(categories, "category", "categories")
@@ -434,11 +436,7 @@ while True:
             remove_items(categories, "category", "categories", "default")
 
       elif command == "listcategories":
-
-            print("\nHere are the categories saved in your session:")
-            for category in categories:
-                  print(category)
-            print()
+            list_items(categories, "categories")
 
       elif command == "addlocations":
             add_items(locations, "location", "locations")
@@ -447,15 +445,7 @@ while True:
             remove_items(locations, "location", "locations")
 
       elif command == "listlocations":
-
-            if not locations:
-                  print("There are no locations saved yet\n")
-
-            else:
-                  print("\nHere are the locations saved in your session:")
-                  for location in locations:
-                        print(location)
-                  print()
+            list_items(locations, "locations")
 
       elif command == "help":
             print("Welcome to the Minecraft Task Manager!!!\n"
