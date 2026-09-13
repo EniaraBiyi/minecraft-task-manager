@@ -90,6 +90,41 @@ def list_items(list_of_items, list_item_plural):
                   print(item)
             print()
 
+def help_message():
+      print("-The program manages all your TASKS. Tasks are the work you need to get done\n"
+            "-They can have associated PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine.\n"
+            "-A task can have only one name and fall under one category, but it can have multiple players and locations assigned\n"
+            "-A task must not strictly have assigned players or locations, and belongs to a built-in default category if you do not assign one.\n"
+            "-Tasks are marked as either completed or uncompleted.\n\n"
+            "Let's familiarise you with the system's command:\n\n"
+            "Tasks:\n"
+            "addtask: add a new task\n"
+            "remtask: delete an unfinished task\n"
+            "checktask: mark an unfinished task as complete\n"
+            "taskscomp: view completed tasks\n"
+            "tasksuncomp: view unfinished tasks\n"
+            "searchtask: find a specific task\n"
+            "alltasks: display the names of all tasks\n\n"
+            "Players:\n"
+            "addplayers: add players to the system\n"
+            "remplayers: remove players from the system\n"
+            "listplayers: view all players\n\n"
+            "Categories:\n"
+            "addcategories: add task categories(eg Mining, Redstone)\n"
+            "remcategories: delete task categories\n"
+            "listcategories: view all task categories\n\n"
+            "Locations:\n"
+            "addlocations: add a locations(eg Basecamp, Sugarcane Farm)\n"
+            "remlocations: remove a location\n"
+            "listlocations: view all locations\n\n"
+            "System/Meta\n"
+            "help: pull up the user manual you are currently reading\n"
+            "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
+            "exit: end your work session\n\n"
+            "Some things you should know:\n"
+            "-This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
+            "-This program removes all leading and trailing whitespace in your inputs\n\n")
+
 #Data Structures:
 tasks = []
 players = []
@@ -97,41 +132,9 @@ locations = []
 categories = ["default"]
 
 #Welcome Message and tutorial
-print("Welcome to the Minec.raft Task Manager!!!\n"
-      "No more shall you struggle with your in-game administrative tasks. You can centralize your workflow here\n\n"
-      "-The program manages all your TASKS. Tasks are the work you need to get done\n"
-      "-They can have associated PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine.\n"
-      "-A task can have only one name and fall under one category, but it can have multiple players and locations assigned\n"
-      "-A task must not strictly have assigned players or locations, and belongs to a built-in default category if you do not assign one.\n"
-      "-Tasks are marked as either completed or uncompleted.\n\n"
-      "Let's familiarise you with the system's command:\n\n"
-      "Tasks:\n"
-      "addtask: add a new task\n"
-      "remtask: delete an unfinished task\n"
-      "checktask: mark an unfinished task as complete\n"
-      "taskscomp: view completed tasks\n"
-      "tasksuncomp: view unfinished tasks\n"
-      "searchtask: find a specific task\n"
-      "alltasks: display the names of all tasks\n\n"
-      "Players:\n"
-      "addplayers: add players to the system\n"
-      "remplayers: remove players from the system\n"
-      "listplayers: view all players\n\n"
-      "Categories:\n"
-      "addcategories: add task categories(eg Mining, Redstone)\n"
-      "remcategories: delete task categories\n"
-      "listcategories: view all task categories\n\n"
-      "Locations:\n"
-      "addlocations: add a locations(eg Basecamp, Sugarcane Farm)\n"
-      "remlocations: remove a location\n"
-      "listlocations: view all locations\n\n"
-      "System/Meta\n"
-      "help: pull up the user manual you are currently reading\n"
-      "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
-      "exit: end your work session\n\n"
-      "Some things you should know:\n"
-      "-This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
-      "-This program removes all leading and trailing whitespace in your inputs\n\n")
+print("Welcome to the Minecraft Task Manager!!!\n"
+      "No more shall you struggle with your in-game administrative tasks. You can centralize your workflow here\n\n")
+help_message()
 
 #Session setup
 print("Let's get your session all setup!\n")
@@ -209,7 +212,7 @@ print("\nGreat, you should be all set up now.\n"
 
 #Command processor
 while True:
-      command = input("Enter command: ")
+      command = input("Enter command: ").strip().lower()
 
       if command == "exit":
             print("\nSession Ended")
@@ -448,41 +451,7 @@ while True:
             list_items(locations, "locations")
 
       elif command == "help":
-            print("Welcome to the Minecraft Task Manager!!!\n"
-            "No more shall you struggle with your in-game administrative tasks. You can centralize your workflow here\n\n"
-            "-The program manages all your TASKS. Tasks are the work you need to get done\n"
-            "-They can have associated PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine.\n"
-            "-A task can have only one name and fall under one category, but it can have multiple players and locations assigned\n"
-            "-A task must not strictly have assigned players or locations, and belongs to a built-in default category if you do not assign one.\n"
-            "-Tasks are marked as either completed or uncompleted.\n\n"
-            "Let's familiarise you with the system's command:\n\n"
-            "Tasks:\n"
-            "addtask: add a new task\n"
-            "remtask: delete an unfinished task\n"
-            "checktask: mark an unfinished task as complete\n"
-            "taskscomp: view completed tasks\n"
-            "tasksuncomp: view unfinished tasks\n"
-            "searchtask: find a specific task\n"
-            "alltasks: display the names of all tasks\n\n"
-            "Players:\n"
-            "addplayers: add players to the system\n"
-            "remplayers: remove players from the system\n"
-            "listplayers: view all players\n\n"
-            "Categories:\n"
-            "addcategories: add task categories(eg Mining, Redstone)\n"
-            "remcategories: delete task categories\n"
-            "listcategories: view all task categories\n\n"
-            "Locations:\n"
-            "addlocations: add a locations(eg Basecamp, Sugarcane Farm)\n"
-            "remlocations: remove a location\n"
-            "listlocations: view all locations\n\n"
-            "System/Meta\n"
-            "help: pull up the user manual you are currently reading\n"
-            "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
-            "exit: end your work session\n\n"
-            "Some things you should know:\n"
-            "-This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
-            "-This program removes all leading and trailing whitespace in your inputs\n\n")
+            help_message()
 
       elif command == "allstatus":
             print("\nHere's overview of your entire session so far:\n")
