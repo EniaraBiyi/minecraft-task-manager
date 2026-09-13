@@ -525,53 +525,8 @@ while True:
                   continue
 
             else:
-                  
-                  completed_tasks = [task for task in tasks if task.get("status")]
-
-                  if not completed_tasks:
-                        print("There aren't any completed tasks\n")
-
-                  else:
-                        print("Completed tasks:")
-                        for task in completed_tasks:
-                              print(f"Name: {task.get("name")}")
-                              print("Players:")
-                              if not task.get("players"):
-                                    print("There are no players assigned to this task\n")
-                              else:
-                                    for player in task.get("players"):
-                                          print(player)
-                              print("Locations:")
-                              if not task.get("locations"):
-                                    print("There are no locations assigned to this task\n")
-                              else:
-                                    for location in task.get("locations"):
-                                          print(location)
-                              print(f"Category: {task.get("category")}\n")
-                  
-                  unfinished_tasks = [task for task in tasks if not task.get("status")]
-
-                  if not unfinished_tasks:
-                        print("There aren't any unfinished tasks\n")
-
-                  else:
-                        print("Unfinished tasks:")
-                        for task in unfinished_tasks:
-                              print(f"Name: {task.get("name")}")
-                              print("Players:")
-                              if not task.get("players"):
-                                    print("There are no players assigned to this task\n")
-                              else:
-                                    for player in task.get("players"):
-                                          print(player)
-                              print("Locations:")
-                              if not task.get("locations"):
-                                    print("There are no locations assigned to this task\n")
-                              else:
-                                    for location in task.get("locations"):
-                                          print(location)
-                              print(f"Category: {task.get("category")}\n")
-
+                  tasks_by_status(tasks, True, "Completed")
+                  tasks_by_status(tasks, False, "Uncompleted")
 
       else:
            print("Unkown Command\n")
