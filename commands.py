@@ -98,3 +98,14 @@ def toggle_status(tasks_in_session, current_status):
                 task["status"] = not current_status
                 print(f"\nThe task was successfully {action}\n")
                 break
+
+def tasks_by_status(list_of_tasks, status, label):
+    matching_tasks = [task for task in list_of_tasks if task.get("status") == status]
+    if not matching_tasks:
+        print(f"You have no {label} tasks")
+        return
+
+    print(f"{label} tasks: ")
+    for task in matching_tasks:
+        print(task.get("name"))
+    print()
