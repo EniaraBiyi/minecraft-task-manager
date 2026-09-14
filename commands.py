@@ -109,3 +109,36 @@ def tasks_by_status(list_of_tasks, status, label):
     for task in matching_tasks:
         print(task.get("name"))
     print()
+
+def searchtask(tasks):
+    if not tasks:
+        print("You currently have no tasks yet\n")
+        return
+
+    task_to_search = input("\nWhich task are you looking for: ").strip().lower()
+
+    for task in tasks:
+        if task.get("name") == task_to_search:
+            print(f"Task Name: {task.get("name")}")
+            print("Assigned Players: ")
+            if task.get("players"):
+                for player in task.get("players"):
+                    print(player)
+            else:
+                print("No assigned players")
+            print("Task Locations:")
+            if task.get("locations"):
+                for location in task.get("locations"):
+                    print(location)
+            else:
+                print("No assigned locations")
+            print(f"Task Category: {task.get("category")}")
+            print("Task Status: ", end="")
+            if task.get("status"):
+                print("Completed")
+            else:
+                print("Unfinished")
+            break
+
+    else:
+        print("No such task of that name exists.\nPlease use the 'alltasks' command to view the tasks saved in your session\n")
