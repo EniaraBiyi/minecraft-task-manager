@@ -21,9 +21,9 @@ def add_items(item_list, item_type, item_type_plural):
             else:
                   break
 
-      label = item_type if len(added_items) else item_type_plural
-      verb = "was" if added_items == 1 else "were"
-      print(f"{added_items} {label} {verb} added")
+      label = item_type if len(added_items) == 1 else item_type_plural
+      verb = "was" if len(added_items) == 1 else "were"
+      print(f"{len(added_items)} {label} {verb} added")
 
       if added_items:
             print(f"Added {item_type_plural}:")
@@ -100,7 +100,8 @@ def help_message():
             "Tasks:\n"
             "addtask: add a new task\n"
             "remtask: delete an unfinished task\n"
-            "checktask: mark an unfinished task as complete\n"
+            "checktask: mark a completed task as complete\n"
+            "unchecktask: revert a completed task to uncompleted"
             "taskscomp: view completed tasks\n"
             "tasksuncomp: view unfinished tasks\n"
             "searchtask: find a specific task\n"
