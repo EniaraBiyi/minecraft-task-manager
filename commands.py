@@ -279,3 +279,37 @@ def help_message():
           "Some things you should know:\n"
           "-This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
           "-This program removes all leading and trailing whitespace in your inputs\n\n")
+
+def allstatus(tasks, players, locations, categories):
+    print("\nHere's overview of your entire session so far:\n")
+
+    if not players:
+        print("There are no players saved in this session\n")
+
+    else:
+        print("Players:")
+        for player in players:
+            print(player)
+        print()
+
+    if not locations:
+        print("There are no locations saved in this session\n")
+
+    else:
+        print("Locations:")
+        for location in locations:
+            print(location)
+        print()
+
+    print("Categories:")
+    for category in categories:
+        print(category)
+    print()
+
+    if not tasks:
+        print("You have no tasks in this session\n")
+        return
+
+    else:
+        tasks_by_status(tasks, True, "Completed")
+        tasks_by_status(tasks, False, "Uncompleted")
