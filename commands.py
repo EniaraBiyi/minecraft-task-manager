@@ -233,3 +233,13 @@ def remove_items(item_list, item_type, item_type_plural, protected_item=None):
         for item in removed_items:
             print(item)
     print()
+    
+def list_items(list_of_items, list_item_plural):
+    if not list_of_items:
+        print(f"There are no {list_item_plural} saved yet\n")
+
+    else:
+        print(f"\nHere are the {list_item_plural} saved in your session:")
+        for item in list_of_items:
+            print(item)
+        print()
