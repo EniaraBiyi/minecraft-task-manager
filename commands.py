@@ -45,3 +45,28 @@ def addtask(tasks, players, locations, categories):
     #add task
     tasks.append(task_to_add)
     print("\nYour task was successfully added\n")
+
+def remtask(tasks):
+    deletable_tasks = [task.get("name") for task in tasks if not task.get("status")]
+
+    if not deletable_tasks:
+        print("There are currently no tasks in the system to delete\n")
+        return
+
+    else:
+        print("\nCurrent pending tasks in system (You can only delete uncompleted tasks)\n:")
+        for task in deletable_tasks:
+            print(task)
+
+    task_to_delete = input("\nEnter the name of the task which you wish to delete: ").strip().lower()
+
+    if not task_to_delete in deletable_tasks:
+        print("No such pending task exists\n")
+        return
+
+    else:
+        for task in tasks:
+            if task.get("name") == task_to_delete:
+                tasks.remove(task)
+                break
+        print("\nThe task was successfully deleted\n")
