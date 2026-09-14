@@ -142,3 +142,20 @@ def searchtask(tasks):
 
     else:
         print("No such task of that name exists.\nPlease use the 'alltasks' command to view the tasks saved in your session\n")
+
+def alltasks(tasks):
+    if not tasks:
+        print("\nNo tasks exist yet\n")
+        return
+
+    print("\nAll Tasks:")
+    counter = 1
+    for task in tasks:
+        print(f"{counter}. {task.get("name")}: ", end="")
+        if task.get("status"):
+            print("Completed")
+        else:
+            print("Unfinished")
+        counter += 1
+
+    print()
