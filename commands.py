@@ -70,3 +70,31 @@ def remtask(tasks):
                 tasks.remove(task)
                 break
         print("\nThe task was successfully deleted\n")
+
+def toggle_status(tasks_in_session, current_status):
+    matching_tasks = [task.get("name") for task in tasks_in_session if task.get("status") == current_status]
+
+    status = "completed" if current_status else "uncompleted"
+    action = "reverted to uncompleted" if current_status else "marked as completed"
+
+    if not matching_tasks:
+        print(f"There are no {status} tasks as of now\n")
+        return
+
+    print(f"\nHere are your {status} tasks: ")
+
+    for task in matching_tasks:
+        print(task)
+
+    task_to_toggle = input(f"\nEnter the name of the task which you wish to have {action}: ").strip().lower()
+
+    if not task_to_toggle in matching_tasks:
+        print(f"The input you entered is invalid. It is not a task that can be {action}\n")
+        return
+
+    else:
+        for task in tasks_in_session:
+            if task.get("name") == task_to_toggle:
+                task["status"] = not current_status
+                print(f"\nThe task was successfully {action}\n")
+                break
