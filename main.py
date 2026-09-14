@@ -168,6 +168,34 @@ def setup(item_list, item_type, item_type_plural, presaved=0):
                         print(item)
                   break
 
+def toggle_status(tasks_in_session, current_status):
+      matching_tasks = [task.get("name") for task in tasks_in_session if task.get("status") == current_status]
+
+      status = "completed" if current_status else "uncompleted"
+      action = "reverted to uncompleted" if current_status else "marked as completed"
+
+      if not matching_tasks:
+            print(f"There are no {status} tasks as of now\n")
+            return
+
+      print(f"\nHere are your {status} tasks: ")
+
+      for task in matching_tasks:
+            print(task)
+
+      task_to_toggle = input(f"\nEnter the name of the task which you wish to have {action}: ").strip().lower()
+
+      if not task_to_toggle in matching_tasks:
+            print(f"The input you entered is invalid. It is not a task that can be {action}\n")
+            return
+
+      else:
+            for task in tasks_in_session:
+                  if task.get("name") == task_to_toggle:
+                        task["status"] = not current_status
+                        print(f"\nThe task was successfully {action}\n")
+                        break
+
 #Data Structures:
 tasks = []
 players = []
@@ -181,6 +209,7 @@ help_message()
 
 #Session setup
 print("Let's get your session all setup!\n")
+
 #Adding players
 print("First, let's add players to your system: ")
 setup(players, "player", "players")
@@ -284,43 +313,18 @@ while True:
                               break
                   print("\nThe task was successfully deleted\n")
 
-      #checktask command logicd
       elif command == "checktask":
+            toggle_status(tasks, False)
 
-            checkable_tasks = [task.get("name") for task in tasks if not task.get("status")]
+      elif command =="unchecktask":
+            toggle_status(tasks, True)
 
-
-            if  not checkable_tasks:
-                print("There are no unfinished tasks as of now:")
-                print()
-                continue
-
-            print("\nHere are your unfinished tasks: ")
-
-            for task in checkable_tasks:
-                  print(task)
-
-            task_to_check = input("\nEnter the name of the task which you wish to check complete: ").strip().lower()
-
-            if not task_to_check in checkable_tasks:
-                  print("\nThe task you entered can't be marked complete")
-                  continue
-
-            else:
-                  for task in tasks:
-                        if task.get("name") == task_to_check:
-                              task["status"] = True
-                              print("\nThe task was successfully checked complete\n")
-                              break
-
-
-      #taskscomp command logic
       elif command == "taskscomp":
             tasks_by_status(tasks, True, "Completed")
-      #taskuncomp command logic
+
       elif command == "tasksuncomp":
             tasks_by_status(tasks, False, "Uncompleted")
-      #searchtask command logic
+
       elif command == "searchtask":
 
             if not tasks:
@@ -377,11 +381,9 @@ while True:
 
             print()
 
-      #addplayers command logic
       elif command == "addplayers":
             add_items(players, "player", "players")
 
-      #remplayers command logic
       elif command == "remplayers":
             remove_items(players, "player", "players")
 
