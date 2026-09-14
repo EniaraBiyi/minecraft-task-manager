@@ -159,3 +159,77 @@ def alltasks(tasks):
         counter += 1
 
     print()
+
+
+def add_items(item_list, item_type, item_type_plural):
+    print(f"\nEnter {item_type_plural} you wish to add, or press Enter alone to finish:")
+
+    added_items = []
+    while True:
+        item = input()
+
+        if item:
+            if item.isspace():
+                print(f"This is all whitespaces and isn't a valid {item_type}\n"
+                      f"Enter valid {item_type_plural}, or press Enter to stop")
+                continue
+            if item.strip().lower() not in item_list:
+                item_list.append(item.strip().lower())
+                added_items.append(item.strip().lower())
+            else:
+                print(
+                    f"This {item_type} is already saved in this session. Be mindful of spelling. Casing is irrelevant")
+                print("You may continue, or press Enter to finish:")
+                continue
+
+        else:
+            break
+
+    label = item_type if len(added_items) == 1 else item_type_plural
+    verb = "was" if len(added_items) == 1 else "were"
+    print(f"{len(added_items)} {label} {verb} added")
+
+    if added_items:
+        print(f"Added {item_type_plural}:")
+        for item in added_items:
+            print(item)
+    print()
+
+
+def remove_items(item_list, item_type, item_type_plural, protected_item=None):
+    min_length = 1 if protected_item else 0
+
+    if len(item_list) == min_length:
+        print(f"There aren't any {item_type_plural} saved in this session that can be deleted\n")
+        return
+
+    print(f"\nEnter {item_type_plural} you wish to remove, or press Enter alone to finish:")
+
+    removed_items = []
+    while True:
+        item = input()
+
+        if item and item.strip().lower() in item_list:
+            if item.strip().lower() != protected_item:
+                item_list.remove(item.strip().lower())
+                removed_items.append(item.strip().lower())
+            else:
+                print(f"{protected_item} is a built-in {item_type} for tasks. It cannot be removed\n"
+                      "You may continue, or press Enter to finish:")
+                continue
+        elif item and item.strip().lower() not in item_list:
+            print(f"This {item_type} is not saved to the system. Be mindful of spelling. Casing is irrelevant")
+            print("You may continue, or press Enter to finish:")
+            continue
+        elif not item:
+            break
+
+    label = item_type if len(removed_items) == 1 else item_type_plural
+    verb = "was" if len(removed_items) == 1 else "were"
+    print(f"{len(removed_items)} {label} {verb} removed")
+
+    if removed_items:
+        print(f"Removed {item_type_plural}:")
+        for item in removed_items:
+            print(item)
+    print()
