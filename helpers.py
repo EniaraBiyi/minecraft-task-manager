@@ -13,10 +13,12 @@ def assign(list_of_items, task_to_be_added, item_type, item_type_plural):
             break
 
         elif item_to_append.strip().lower() not in list_of_items:
-            print(f"The {item_type} entered has not yet been saved in this session.")
+            print(f"Your input is invalid. The {item_type} entered has not yet been saved in this session\n"
+                  f"Enter {item_type_plural} assigned to the task, or press Enter with no input to skip:")
 
         elif item_to_append.strip().lower() in items_to_assign:
-            print(f"That {item_type} has already been assigned to this task")
+            print(f"That {item_type} has already been assigned to this task\n"
+                  f"Enter {item_type_plural} assigned to the task, or press Enter with no input to skip:")
 
         else:
             items_to_assign.append(item_to_append.strip().lower())
@@ -57,6 +59,7 @@ def tasks_by_status(list_of_tasks, status, label):
         print(f"You have no {label} tasks")
         return
 
+    #display matching tasks
     print(f"{label} tasks: ")
     for task in matching_tasks:
         print(task.get("name"))
@@ -100,7 +103,7 @@ def add_items(item_list, item_type, item_type_plural):
     print()
 
 
-def remove_items(item_list, item_type, item_type_plural, protected_item=None):
+def remove_items(tasks, item_list, item_type, item_type_plural, protected_item=None):
     min_length = 1 if protected_item else 0
 
     if len(item_list) == min_length:
@@ -117,17 +120,39 @@ def remove_items(item_list, item_type, item_type_plural, protected_item=None):
         item = input()
 
         if item and item.strip().lower() in item_list:
-            if item.strip().lower() != protected_item:
-                item_list.remove(item.strip().lower())
-                removed_items.append(item.strip().lower())
-            else:
+            candidate = item.strip().lower()
+
+            if candidate == protected_item:
                 print(f"{protected_item} is a built-in {item_type} for tasks. It cannot be removed\n"
                       "You may continue, or press Enter to finish:")
                 continue
+
+            #check if any task currently references this item
+            key = "category" if item_type == "category" else item_type_plural
+            in_use = False
+            for task in tasks:
+                task_value = task.get(key)
+                if isinstance(task_value, list):
+                    if candidate in task_value:
+                        in_use = True
+                        break
+                elif task_value == candidate:
+                    in_use = True
+                    break
+
+            if in_use:
+                print(f"This {item_type} is currently assigned to a task and cannot be deleted\n"
+                      "You may continue, or press Enter to finish:")
+                continue
+
+            item_list.remove(candidate)
+            removed_items.append(candidate)
+
         elif item and item.strip().lower() not in item_list:
-            print(f"This {item_type} is not saved to the system. Be mindful of spelling. Casing is irrelevant")
+            print(f"Invalid input. The {item_type} you entered is not saved to the system. Be mindful of spelling. Casing is irrelevant")
             print("You may continue, or press Enter to finish:")
             continue
+
         elif not item:
             break
 

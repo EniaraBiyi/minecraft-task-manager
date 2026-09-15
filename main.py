@@ -67,7 +67,7 @@ while True:
             c.addplayers(players)
 
       elif command == "remplayers":
-            c.remplayers(players)
+            c.remplayers(players, tasks)
 
       elif command == "listplayers":
             c.listplayers(players)
@@ -76,7 +76,7 @@ while True:
             c.addcategories(categories)
 
       elif command == "remcategories":
-            c.remcategories(categories)
+            c.remcategories(categories, tasks)
 
       elif command == "listcategories":
             c.listcategories(categories)
@@ -85,7 +85,7 @@ while True:
             c.addlocations(locations)
 
       elif command == "remlocations":
-            c.remlocations(locations)
+            c.remlocations(locations, tasks)
 
       elif command == "listlocations":
             c.listlocations(locations)

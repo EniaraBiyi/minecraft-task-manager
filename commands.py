@@ -111,7 +111,7 @@ def searchtask(tasks):
             else:
                 print("No assigned locations")
             print(f"\nTask Category: {task.get("category")}")
-            print(f"\nTask Status: {"completed\n" if task.get("status") else "uncompleted\n"}", end="")
+            print(f"\nTask Status: {"completed\n" if task.get("status") else "uncompleted\n"}")
             break
 
     else:
@@ -138,8 +138,8 @@ def alltasks(tasks):
 def addplayers(players):
     h.add_items(players, "player", "players")
 
-def remplayers(players):
-    h.remove_items(players, "player", "players")
+def remplayers(players, tasks):
+    h.remove_items(tasks, players, "player", "players")
 
 def listplayers(players):
     h.list_items(players, "players")
@@ -147,8 +147,8 @@ def listplayers(players):
 def addlocations(locations):
     h.add_items(locations, "location", "locations")
 
-def remlocations(locations):
-    h.remove_items(locations, "location", "locations")
+def remlocations(locations, tasks):
+    h.remove_items(tasks, locations, "location", "locations")
 
 def listlocations(locations):
     h.list_items(locations, "locations")
@@ -156,8 +156,8 @@ def listlocations(locations):
 def addcategories(categories):
     h.add_items(categories, "category", "categories")
 
-def remcategories(categories):
-    h.remove_items(categories, "category", "categories", "default")
+def remcategories(categories, tasks):
+    h.remove_items(tasks, categories, "category", "categories", "default")
 
 def listcategories(categories):
     h.list_items(categories, "categories")
