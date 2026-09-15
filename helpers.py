@@ -1,5 +1,6 @@
 def assign(list_of_items, task_to_be_added, item_type, item_type_plural):
-    print(f"\nEnter {item_type_plural} assigned to the task, or press Enter to skip:")
+    #user prompt
+    print(f"\nEnter {item_type_plural} assigned to the task, or press Enter with no input to skip:")
 
     items_to_assign = []
 
@@ -32,6 +33,7 @@ def toggle_status(tasks_in_session, current_status):
 
     print(f"\nHere are your {status} tasks: ")
 
+    #display matching tasks
     for task in matching_tasks:
         print(task)
 
@@ -42,6 +44,7 @@ def toggle_status(tasks_in_session, current_status):
         return
 
     else:
+        #toggle status
         for task in tasks_in_session:
             if task.get("name") == task_to_toggle:
                 task["status"] = not current_status
@@ -60,23 +63,25 @@ def tasks_by_status(list_of_tasks, status, label):
     print()
 
 def add_items(item_list, item_type, item_type_plural):
+    #user prompt
     print(f"\nEnter {item_type_plural} you wish to add, or press Enter alone to finish:")
 
     added_items = []
+
+    #validate input
     while True:
         item = input()
 
         if item:
             if item.isspace():
                 print(f"This is all whitespaces and isn't a valid {item_type}\n"
-                      f"Enter valid {item_type_plural}, or press Enter to stop")
+                      f"Enter valid {item_type_plural}, or press Enter to stop:")
                 continue
             if item.strip().lower() not in item_list:
                 item_list.append(item.strip().lower())
                 added_items.append(item.strip().lower())
-            else:
-                print(
-                    f"This {item_type} is already saved in this session. Be mindful of spelling. Casing is irrelevant")
+            elif item.strip().lower() in item_list:
+                print(f"This {item_type} is already saved in this session. Be mindful of spelling. Casing is irrelevant")
                 print("You may continue, or press Enter to finish:")
                 continue
 
@@ -87,6 +92,7 @@ def add_items(item_list, item_type, item_type_plural):
     verb = "was" if len(added_items) == 1 else "were"
     print(f"{len(added_items)} {label} {verb} added")
 
+    #display added items
     if added_items:
         print(f"Added {item_type_plural}:")
         for item in added_items:
@@ -101,9 +107,12 @@ def remove_items(item_list, item_type, item_type_plural, protected_item=None):
         print(f"There aren't any {item_type_plural} saved in this session that can be deleted\n")
         return
 
+    #user prompt
     print(f"\nEnter {item_type_plural} you wish to remove, or press Enter alone to finish:")
 
     removed_items = []
+
+    #validate input
     while True:
         item = input()
 
@@ -136,6 +145,7 @@ def list_items(list_of_items, list_item_plural):
     if not list_of_items:
         print(f"There are no {list_item_plural} saved yet\n")
 
+    #display all items
     else:
         print(f"\nHere are the {list_item_plural} saved in your session:")
         for item in list_of_items:

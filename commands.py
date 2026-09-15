@@ -5,7 +5,7 @@ def addtask(tasks, players, locations, categories):
     #obtain task name
     print("\nEnter inputs for the prompts accordingly. Press Enter without input to skip or continue")
     while True:
-        task_name = input("Enter task name: ")
+        task_name = input("Enter the task name: ")
 
         if not task_name or task_name.isspace():
             print("You must enter a valid task name")
@@ -25,8 +25,7 @@ def addtask(tasks, players, locations, categories):
 
     #obtain task category
     while True:
-        task_category = input(
-            "\nEnter the category for this task. Press Enter alone to put task in the default category: ")
+        task_category = input("\nEnter the category for this task. Press Enter alone to put task in the default category: ")
 
         if not task_category:
             task_to_add["category"] = "default"
@@ -53,17 +52,20 @@ def remtask(tasks):
         print("There are currently no tasks in the system to delete\n")
         return
 
+    #display uncompleted tasks
     else:
         print("\nCurrent pending tasks in system (You can only delete uncompleted tasks)\n:")
         for task in deletable_tasks:
             print(task)
 
+    #obtain task name
     task_to_delete = input("\nEnter the name of the task which you wish to delete: ").strip().lower()
 
     if not task_to_delete in deletable_tasks:
         print("No such pending task exists\n")
         return
 
+    #remove task
     else:
         for task in tasks:
             if task.get("name") == task_to_delete:
@@ -77,10 +79,10 @@ def checktask(tasks):
 def unchecktask(tasks):
     h.toggle_status(tasks, True)
 
-def taskcomp(tasks):
+def taskscomp(tasks):
     h.tasks_by_status(tasks, True, "Completed")
 
-def taskluncomp(tasks):
+def tasksuncomp(tasks):
     h.tasks_by_status(tasks, False, "Uncompleted")
 
 def searchtask(tasks):
@@ -88,29 +90,28 @@ def searchtask(tasks):
         print("You currently have no tasks yet\n")
         return
 
+    #user prompt
     task_to_search = input("\nWhich task are you looking for: ").strip().lower()
 
     for task in tasks:
         if task.get("name") == task_to_search:
-            print(f"Task Name: {task.get("name")}")
-            print("Assigned Players: ")
+
+            #print task details
+            print(f"\nTask Name: {task.get("name")}")
+            print("\nAssigned Players: ")
             if task.get("players"):
                 for player in task.get("players"):
                     print(player)
             else:
                 print("No assigned players")
-            print("Task Locations:")
+            print("\nTask Locations:")
             if task.get("locations"):
                 for location in task.get("locations"):
                     print(location)
             else:
                 print("No assigned locations")
-            print(f"Task Category: {task.get("category")}")
-            print("Task Status: ", end="")
-            if task.get("status"):
-                print("Completed")
-            else:
-                print("Unfinished")
+            print(f"\nTask Category: {task.get("category")}")
+            print(f"\nTask Status: {"completed\n" if task.get("status") else "uncompleted\n"}", end="")
             break
 
     else:
@@ -121,14 +122,15 @@ def alltasks(tasks):
         print("\nNo tasks exist yet\n")
         return
 
+    #display tasks
     print("\nAll Tasks:")
     counter = 1
     for task in tasks:
         print(f"{counter}. {task.get("name")}: ", end="")
         if task.get("status"):
-            print("Completed")
+            print("completed")
         else:
-            print("Unfinished")
+            print("uncompleted")
         counter += 1
 
     print()
@@ -162,43 +164,44 @@ def listcategories(categories):
 
 def help_message():
     print("-The program manages all your TASKS. Tasks are the work you need to get done\n"
-          "-They can have associated PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine.\n"
-          "-A task can have only one name and fall under one category, but it can have multiple players and locations assigned\n"
-          "-A task must not strictly have assigned players or locations, and belongs to a built-in default category if you do not assign one.\n"
-          "-Tasks are marked as either completed or uncompleted.\n\n"
+          "-They can have associated PLAYERS, designated LOCATIONS, and belong to a CATEGORY, all of which you predetermine\n"
+          "-A task can have only one unique name and fall under one category, but it can have multiple players and locations assigned\n"
+          "-A task must not strictly have assigned players or locations, and will belong to a built-in default category if you do not assign one yourself.\n"
+          "-Tasks are marked as either completed(finished) or uncompleted(pending).\n\n"
           "Let's familiarise you with the system's command:\n\n"
           "Tasks:\n"
           "addtask: add a new task\n"
           "remtask: delete an unfinished task\n"
-          "checktask: mark a completed task as complete\n"
-          "unchecktask: revert a completed task to uncompleted"
-          "taskscomp: view completed tasks\n"
-          "tasksuncomp: view unfinished tasks\n"
+          "checktask: mark a uncompleted task as completed\n"
+          "unchecktask: revert a completed task to uncompleted\n"
+          "taskscomp: view all completed tasks\n"
+          "tasksuncomp: view all unfinished tasks\n"
           "searchtask: find a specific task\n"
           "alltasks: display the names of all tasks\n\n"
           "Players:\n"
-          "addplayers: add players to the system\n"
-          "remplayers: remove players from the system\n"
-          "listplayers: view all players\n\n"
+          "addplayers: add new players to this session\n"
+          "remplayers: remove saved players from this session\n"
+          "listplayers: view all saved players\n\n"
           "Categories:\n"
-          "addcategories: add task categories(eg Mining, Redstone)\n"
-          "remcategories: delete task categories\n"
+          "addcategories: add new task categories(eg Mining, Redstone)\n"
+          "remcategories: delete saved task categories\n"
           "listcategories: view all task categories\n\n"
           "Locations:\n"
-          "addlocations: add a locations(eg Basecamp, Sugarcane Farm)\n"
-          "remlocations: remove a location\n"
-          "listlocations: view all locations\n\n"
+          "addlocations: add  new locations(eg Basecamp, Sugarcane Farm)\n"
+          "remlocations: remove saved locations\n"
+          "listlocations: view all saved locations\n\n"
           "System/Meta\n"
           "help: pull up the user manual you are currently reading\n"
-          "allstatus: to view all tasks, players, locations, categories (an overview of the whole session)\n"
+          "allstatus: view all tasks, players, locations and categories (an overview of the whole session)\n"
           "exit: end your work session\n\n"
           "Some things you should know:\n"
           "-This program is not case sensitive. So 'Steve' and 'steve' are  considered the same thing\n"
           "-This program removes all leading and trailing whitespace in your inputs\n\n")
 
 def allstatus(tasks, players, locations, categories):
-    print("\nHere's overview of your entire session so far:\n")
+    print("\nHere's an overview of your entire session so far:\n")
 
+    #display all players
     if not players:
         print("There are no players saved in this session\n")
 
@@ -208,6 +211,7 @@ def allstatus(tasks, players, locations, categories):
             print(player)
         print()
 
+    #display all locations
     if not locations:
         print("There are no locations saved in this session\n")
 
@@ -217,6 +221,7 @@ def allstatus(tasks, players, locations, categories):
             print(location)
         print()
 
+    #display all categories
     print("Categories:")
     for category in categories:
         print(category)
@@ -226,18 +231,22 @@ def allstatus(tasks, players, locations, categories):
         print("You have no tasks in this session\n")
         return
 
+    #display tasks
     else:
         h.tasks_by_status(tasks, True, "Completed")
         h.tasks_by_status(tasks, False, "Uncompleted")
 
 
 def setup(item_list, item_type, item_type_plural, presaved=0):
+    #user prompt
     print(f"Enter {item_type_plural} you want to save, or press Enter with no input to finish:")
+
     while True:
+        #validate and append input
         item = input()
         if item:
             if item.isspace():
-                print(f"I don't see anything. Please enter a valid {item_type}")
+                print(f"I don't see anything. Please only enter valid {item_type_plural}:")
                 continue
             elif item.lower().strip() in item_list:
                 print(f"You already entered this {item_type}")
